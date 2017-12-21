@@ -16,11 +16,13 @@ const argv = yargs //takes user input.  yargs allows for parsing arguments.
   .alias('help', 'h')
   .argv;
 
+//function responsible for all logic involved in handling user input address
 geocode.geocodeAddress(argv.address, (errorMessage, results) => {
   if (errorMessage) {
     console.log(errorMessage);
   } else {
     console.log(results.address);
+    //function responsible for handling geolocation output coordinates into DarkSky weather api
     weather.getWeather(results.latitude, results.longitude, (errorMessage, weatherResults) => {
       if (errorMessage) {
         console.log(errorMessage);
@@ -29,4 +31,4 @@ geocode.geocodeAddress(argv.address, (errorMessage, results) => {
       }
     });
   }
-}); //function responsible for all logic involved in handling user input address
+});
